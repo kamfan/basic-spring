@@ -1,21 +1,18 @@
 package conectis.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "person")
 public class Person {
-    private long id;
+    @Id // to jest klucz główny
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "name", length = 50)
     private String name;
+
+    @Column(name = "email", length = 50, unique = true)
     private String email;
-    private static long counter = 1;
-
-    public Person() {
-        this.id = counter;
-        counter ++;
-    }
-
-    public Person(long id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
 
     public long getId() {
         return id;
@@ -42,6 +39,5 @@ public class Person {
     }
 
     public static void setCounter(long counter) {
-        Person.counter = counter;
     }
 }
